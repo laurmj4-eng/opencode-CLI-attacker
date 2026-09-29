@@ -15,5 +15,13 @@
   "skills": {
     "paths": [".opencode/skills"]
   },
-  "plugin": ["./.opencode/plugin/system-prompt-override.js", "./.opencode/plugin/cyberstrike-unified.js"]
+  "plugin": ["./.opencode/plugin/system-prompt-override.js", "./.opencode/plugin/cyberstrike-unified.js"],
+  "mcp": {
+    "sec-tools": {
+      "type": "local",
+      "enabled": true,
+      "command": "node",
+      "args": ["C:\\xampp\\htdocs\\opencode-cli\\mcp-servers\\sec-tools\\index.js"]
+    }
+  }
 }
