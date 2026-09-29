@@ -37,11 +37,6 @@
       "enabled": true,
       "command": ["bloodhound"]
     },
-    "sec-shodan": {
-      "type": "local",
-      "enabled": true,
-      "command": ["shodan"]
-    },
     "sec-github": {
       "type": "local",
       "enabled": true,
