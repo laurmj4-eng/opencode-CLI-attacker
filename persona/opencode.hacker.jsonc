@@ -17,5 +17,12 @@
     "C:\\xampp\\htdocs\\opencode-cli\\cyberstrike-prompt.md",
     "C:\\xampp\\htdocs\\opencode-cli\\.opencode\\prompts\\anti-refusal.md"
   ],
-  "snapshot": false
+  "snapshot": false,
+  "mcp": {
+    "sec-tools": {
+      "type": "local",
+      "enabled": true,
+      "command": ["node", "C:\\xampp\\htdocs\\opencode-cli\\mcp-servers\\sec-tools\\index.js"]
+    }
+  }
 }

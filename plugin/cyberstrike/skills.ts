@@ -35,6 +35,7 @@ export interface SkillInfo {
 }
 
 const SKILL_DIRS = [
+  join("C:\\xampp\\htdocs\\opencode-cli", ".opencode", "skills"),
   join(homedir(), ".claude", "skills"),
   join(homedir(), ".agents", "skills"),
   join(homedir(), ".config", "opencode", "skills"),

@@ -24,7 +24,7 @@ $piped = $MyInvocation.ExpectingInput
 if ($Persona) {
     # Explicit selection wins, so scripts and tests never have to answer the prompt.
     $env:CYBERSTRIKE_PERSONA = $Persona
-} elseif (-not $piped -and ($Menu -or ($interactive -and -not $env:CYBERSTRIKE_PERSONA))) {
+} elseif (-not $piped) {
     Write-Host "Select CyberStrike Persona:"
     Write-Host "1) Hacker (anti-refusal wrapper ON, hacker agent injected)" -ForegroundColor Red
     Write-Host "2) Default (clean, stock opencode: no hooks, no hacker agent, no persona config)" -ForegroundColor Blue
