@@ -1,0 +1,38 @@
+{
+  "name": "@enihcam/webmcp-bridge",
+  "version": "0.3.0",
+  "type": "module",
+  "description": "MCP server bridge that exposes WebMCP tools from Chrome to OpenCode",
+  "keywords": [
+    "mcp",
+    "webmcp",
+    "mcp-server",
+    "opencode",
+    "claude-code",
+    "chrome-devtools",
+    "puppeteer",
+    "browser-automation",
+    "ai-tools",
+    "chrome-extension"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enihcam/opencode-webmcp.git"
+  },
+  "files": [
+    "server.js",
+    "lib/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "main": "server.js",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.9.0",
+    "js-yaml": "^5.2.1",
+    "puppeteer-core": "^25.3.0"
+  }
+}

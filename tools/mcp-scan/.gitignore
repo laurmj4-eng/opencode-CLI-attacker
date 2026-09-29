@@ -1,0 +1,13 @@
+__pycache__
+uv.lock
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info
+*.egg
+*.whl
+*.db
+messages.json
+policy.txt
+response.json

@@ -56,6 +56,31 @@
       "type": "local",
       "enabled": true,
       "command": ["msfconsole"]
+    },
+    "operant": {
+      "type": "local",
+      "enabled": true,
+      "command": ["npx", "-y", "operant-mcp"]
+    },
+    "webmcp": {
+      "type": "local",
+      "enabled": true,
+      "command": ["node", "C:\\xampp\\htdocs\\opencode-cli\\tools\\opencode-webmcp\\server.js"],
+      "environment": {
+        "CHROME_PATH": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "WEBMCP_TARGET_URL": "about:blank",
+        "WEBMCP_HEADLESS": "true"
+      }
+    },
+    "mcp-scan": {
+      "type": "local",
+      "enabled": true,
+      "command": ["uvx", "mcp-scan@latest"]
+    },
+    "mcp-security-hub": {
+      "type": "local",
+      "enabled": true,
+      "command": ["docker", "compose", "-f", "C:\\xampp\\htdocs\\opencode-cli\\tools\\mcp-security-hub\\docker-compose.yml", "up", "-d"]
     }
   }
 }

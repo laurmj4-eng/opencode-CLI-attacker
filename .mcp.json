@@ -1,0 +1,164 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/schemas/mcp-project.schema.json",
+  "mcpServers": {
+    "nmap": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "--cap-add=NET_RAW", "nmap-mcp:latest"]
+    },
+    "nuclei": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "nuclei-mcp:latest"]
+    },
+    "sqlmap": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "sqlmap-mcp:latest"]
+    },
+    "ffuf": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "ffuf-mcp:latest"]
+    },
+    "nikto": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "nikto-mcp:latest"]
+    },
+    "gitleaks": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-v", ".:/app/target:ro", "gitleaks-mcp:latest"]
+    },
+    "radare2": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-v", "/path/to/binaries:/samples:ro", "radare2-mcp:latest"]
+    },
+    "yara": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-v", "/path/to/samples:/app/samples:ro", "-v", "/path/to/yara-rules:/app/rules:ro", "yara-mcp:latest"]
+    },
+    "capa": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-v", "/path/to/samples:/app/samples:ro", "capa-mcp:latest"]
+    },
+    "binwalk": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-v", "/path/to/firmware:/app/samples:ro", "binwalk-mcp:latest"]
+    },
+    "trivy": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-v", "/var/run/docker.sock:/var/run/docker.sock:ro", "-v", "/path/to/scan:/app/target:ro", "trivy-mcp:latest"]
+    },
+    "prowler": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-v", "${HOME}/.aws:/home/mcpuser/.aws:ro", "prowler-mcp:latest"],
+      "env": {
+        "AWS_DEFAULT_REGION": "us-east-1"
+      }
+    },
+    "masscan": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "--cap-add=NET_RAW", "masscan-mcp:latest"]
+    },
+    "whatweb": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "whatweb-mcp:latest"]
+    },
+    "searchsploit": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "searchsploit-mcp:latest"]
+    },
+    "waybackurls": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "waybackurls-mcp:latest"]
+    },
+    "semgrep": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-v", "/path/to/code:/app/target:ro", "semgrep-mcp:latest"]
+    },
+    "shodan": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "shodan-mcp:latest"]
+    },
+    "pd-tools": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "pd-tools-mcp:latest"]
+    },
+    "maigret": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "maigret-mcp:latest"]
+    },
+    "dnstwist": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "dnstwist-mcp:latest"]
+    },
+    "virustotal": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "virustotal-mcp:latest"]
+    },
+    "otx": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "otx-mcp:latest"]
+    },
+    "hashcat": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "hashcat-mcp:latest"]
+    },
+    "bloodhound": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "bloodhound-mcp:latest"]
+    },
+    "roadrecon": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "roadrecon-mcp:latest"]
+    },
+    "boofuzz": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "boofuzz-mcp:latest"]
+    },
+    "dharma": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "dharma-mcp:latest"]
+    },
+    "zoomeye": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "zoomeye-mcp:latest"]
+    },
+    "networksdb": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "networksdb-mcp:latest"]
+    },
+    "externalattacker": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "externalattacker-mcp:latest"]
+    },
+    "burp": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "burp-mcp:latest"]
+    },
+    "ghidra": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "ghidra-mcp:latest"]
+    },
+    "ida": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "ida-mcp:latest"]
+    },
+    "daml-viewer": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "daml-viewer-mcp:latest"]
+    },
+    "medusa": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "medusa-mcp:latest"]
+    },
+    "solazy": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "solazy-mcp:latest"]
+    },
+    "go-analyzer": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "go-analyzer-mcp:latest"]
+    },
+    "go-fuzzer": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "go-fuzzer-mcp:latest"]
+    }
+  }
+}
