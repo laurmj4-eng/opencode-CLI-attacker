@@ -41,6 +41,9 @@
     }
   },
   "snapshot": false,
+  "plugin": [
+    "file:///C:/Users/emili/.config/opencode/plugin/cyberstrike-unified.js"
+  ],
   "mcp": {
     "sec-tools": {
       "type": "local",

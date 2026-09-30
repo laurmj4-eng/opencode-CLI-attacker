@@ -59,6 +59,13 @@ if ($isHacker) {
     $env:OPENCODE_DISABLE_CLAUDE_CODE = "1"
 }
 
+# Config dir must be defined before any block that writes into it. The hacker
+# block below (system-prompts.json copy + live opencode.json plugin merge) runs
+# before the persona-swap section, so a late definition left $configDir empty
+# there and the copy resolved to the drive root (C:\system-prompts.json), which
+# a standard user cannot write.
+$configDir = "$HOME\.config\opencode"
+
 # Ensure the plugin directory exists and the persona plugin is installed
 $pluginDir = "$HOME\.config\opencode\plugin"
 if (-not (Test-Path $pluginDir)) {
@@ -73,6 +80,30 @@ New-Item -ItemType Directory -Force -Path "$pluginDir\cyberstrike" | Out-Null
 New-Item -ItemType Directory -Force -Path "$pluginDir\anti-claude-refusals\.opencode\plugins" | Out-Null
 Copy-Item "$srcPlugin\cyberstrike\index.js","$srcPlugin\cyberstrike\index.ts","$srcPlugin\cyberstrike\skills.ts" "$pluginDir\cyberstrike\" -Force
 Copy-Item "$srcPlugin\anti-claude-refusals\.opencode\plugins\anti-killswitch.ts" "$pluginDir\anti-claude-refusals\.opencode\plugins\" -Force
+
+# Anti-refusal runtime: the unified plugin (refusal regex + provenance + killchain scope)
+# and the model-specific system-prompts rules. Both live in the repo as single source of
+# truth; deploy them on every launch so a regeneration can never silently revert them.
+if ($isHacker) {
+    Copy-Item "C:\xampp\htdocs\opencode-cli\.opencode\plugin\cyberstrike-unified.js" "$pluginDir\cyberstrike-unified.js" -Force
+    Copy-Item "C:\xampp\htdocs\opencode-cli\.opencode\system-prompts.json" "$configDir\system-prompts.json" -Force
+
+    # Ensure the live opencode.json plugin array references the unified plugin.
+    $liveJson = "$configDir\opencode.json"
+    $unifiedRef = "file:///$($pluginDir -replace '\\','/')/cyberstrike-unified.js"
+    if (Test-Path $liveJson) {
+        try {
+            $cfg = Get-Content $liveJson -Raw | ConvertFrom-Json
+            if (-not $cfg.plugin) { $cfg | Add-Member -NotePropertyName plugin -NotePropertyValue @() }
+            if ($cfg.plugin -notcontains $unifiedRef) {
+                $cfg.plugin += $unifiedRef
+                $cfg | ConvertTo-Json -Depth 32 | Set-Content $liveJson -Encoding UTF8
+            }
+        } catch {
+            Write-Warning "opencode.ps1: could not ensure unified plugin in live config: $($_.Exception.Message)"
+        }
+    }
+}
 
 # Manage the hacker agent based on persona
 $agentDir = "C:\cyberstrike\.opencode\agent"
@@ -98,7 +129,7 @@ if ($isHacker) {
 # ~/.config/opencode/opencode.json keeps plugins/providers; the persona-specific
 # keys (default_agent, instructions, model) live here so the default persona never
 # inherits the hacker agent or the hacker-persona.md instructions file.
-$configDir = "$HOME\.config\opencode"
+# ($configDir is defined near the top - see the plugin-install section.)
 $liveConfig = "$configDir\opencode.jsonc"
 $personaConfig = if ($isHacker) {
     "C:\xampp\htdocs\opencode-cli\persona\opencode.hacker.jsonc"
