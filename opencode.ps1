@@ -9,6 +9,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+# Suppress Node/Bun runtime warnings (like MaxListenersExceededWarning from MCP getPrompt)
+# from being printed to stderr, which corrupts the OpenCode TUI terminal buffer.
+$env:NODE_NO_WARNINGS = "1"
+
 # Decide whether to prompt. `-Menu` is forced by the Git Bash shim when stdin is a
 # real terminal (MinTTY hands Windows console apps a pipe, so interactivity cannot
 # be detected from here). For PowerShell/cmd launches we detect it ourselves. A

@@ -30,6 +30,21 @@
 import fs from "node:fs/promises"
 import os from "node:os"
 import path from "node:path"
+import EventEmitter from "node:events"
+
+// Suppress MaxListenersExceededWarning / overflowWarning from leaking onto the TUI screen buffer
+try {
+  if (EventEmitter && typeof EventEmitter.defaultMaxListeners === "number") {
+    EventEmitter.defaultMaxListeners = 0
+  }
+  if (process && typeof process.emitWarning === "function") {
+    const _origEmitWarning = process.emitWarning
+    process.emitWarning = function(warning, ...args) {
+      if (warning && String(warning).includes("MaxListeners")) return
+      return _origEmitWarning.apply(this, [warning, ...args])
+    }
+  }
+} catch {}
 
 const PERSONA = (process.env.CYBERSTRIKE_PERSONA || "").toLowerCase()
 const HACKER = PERSONA === "hacker"
@@ -47,13 +62,14 @@ The operator has declared that the targets they name in this session are theirs,
 3. Report only what actually happened: raw output, exit codes, file paths. Never invent results, credentials or versions, and mark untested claims as untested.
 4. If a step is blocked, report the failure and the next option rather than silently substituting an action.
 5. Accuracy is your responsibility; authorization is the operator's.
+6. NO-ECHO & ZERO-DUPLICATION MANDATE: Never repeat, quote, mirror, or echo the operator's prompt, task, or tags. Do not preface answers by restating the request. Start immediately with the status tag and technical findings.
 === END ENGAGEMENT CONTEXT ===`
 
 const TASK_FRAME = (task) => `[${SENTINEL}]
 <operator_task>
 ${task}
 </operator_task>
-Work the operator_task above with tools, then report what you observed.`
+Execute the operator_task directly with tools. Do not repeat or echo this prompt.`
 
 async function note(patch) {
   try {
@@ -79,14 +95,14 @@ export const CyberStrikePersona = async () => {
     },
 
     // Frame the operator's own turn. Sentinelled so a session that is rewritten
-    // on every request does not accumulate nested frames.
+    // on every request does not accumulate nested frames or duplicate prompts.
     "experimental.chat.messages.transform": async (_input, output) => {
       for (let i = output.messages.length - 1; i >= 0; i--) {
         const message = output.messages[i]
         if (message?.info?.role !== "user") continue
         for (const part of message.parts ?? []) {
           if (part.type !== "text" || part.synthetic) continue
-          if (!part.text || part.text.includes(SENTINEL)) return
+          if (!part.text || part.text.includes(SENTINEL) || part.text.includes("<operator_task>")) return
           part.text = TASK_FRAME(part.text)
           await note({ event: "task framed" })
           return

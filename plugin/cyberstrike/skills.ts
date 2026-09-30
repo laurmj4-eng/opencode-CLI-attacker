@@ -128,15 +128,22 @@ export const CyberStrikeSkillsPlugin = async () => {
   ).join("\n\n")
   
   return {
-    // NOTE: opencode's experimental.chat.system.transform fires but its output is discarded
-    // (verified on 1.18.32: markers injected there never reach the model). Inject through
-    // messages.transform instead, which is delivered.
+    // Inject skills context cleanly once without duplicating or pushing trailing user messages
     "experimental.chat.messages.transform": async (_input: any, output: any) => {
       if (!output?.messages?.length) return
-      output.messages.push({
-        info: { role: "user", parts: [] },
-        parts: [{ type: "text", text: `## Available CyberStrike Skills\n${skillContext}` }],
-      })
+      const alreadyInjected = output.messages.some((m: any) =>
+        m?.parts?.some((p: any) => typeof p?.text === "string" && p.text.includes("Available CyberStrike Skills"))
+      )
+      if (alreadyInjected) return
+
+      // Prepend to the first user message text once, avoiding an orphan trailing user message
+      const firstUserMsg = output.messages.find((m: any) => m?.info?.role === "user")
+      if (firstUserMsg && Array.isArray(firstUserMsg.parts) && firstUserMsg.parts.length > 0) {
+        const textPart = firstUserMsg.parts.find((p: any) => p?.type === "text")
+        if (textPart && typeof textPart.text === "string") {
+          textPart.text = `[Available CyberStrike Skills]\n${skillContext}\n[/Available CyberStrike Skills]\n\n${textPart.text}`
+        }
+      }
     },
   }
 }
