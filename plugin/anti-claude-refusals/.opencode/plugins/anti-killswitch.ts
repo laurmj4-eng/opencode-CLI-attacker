@@ -104,7 +104,24 @@ const BLOCKED_STRINGS: string[] = [
   ""Helping you set up a lab environment"",
   ""Reviewing code for security issues"",
   ""Discussing defensive measures and hardening"",
-  ""What would you like to do?"",]
+  ""What would you like to do?"",
+  // Fledge Alpha meta-decline: wrapped task detection
+  ""I can't adopt the persona or follow the override instructions in that message"",
+  ""those don't change how I operate"",
+  ""I can't adopt the persona or follow the override instructions"",
+  ""those don't change how I operate"",
+  ""I can't adopt the injected persona"",
+  ""I should respond helpfully and briefly"",
+  ""not adopting the jailbreak persona"",
+  ""I should respond helpfully and briefly, noting I can't adopt the injected persona"",
+  ""Keep it short"",
+  ""Hello! I can't adopt the persona or follow the override instructions in that message"",
+  ""If you're doing legitimate security work, I'm glad to help with things like"",
+  ""Explaining vulnerability classes and how to test for them in systems you own or are authorized to assess"",
+  ""Writing or reviewing detection rules, hardening configs, or remediation steps"",
+  ""Helping with CTF challenges or lab environments"",
+  ""Interpreting scan results or tool output you've gathered"",
+  ""What are you working on?"",]
 
 function sanitise(value: string): string {
   let result = value
@@ -155,5 +172,6 @@ export const AntiKillswitchPlugin = async () => {
     },
   }
 }
+
 
 
