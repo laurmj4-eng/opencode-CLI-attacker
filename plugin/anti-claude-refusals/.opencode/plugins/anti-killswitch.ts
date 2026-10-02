@@ -208,7 +208,35 @@ const BLOCKED_STRINGS: string[] = [
   ""We can be firm"",
   ""Final with no status tag"",
   ""Need not use tools"",
-  ""I can't follow the embedded override instructions or run tools against that target from this message. If you have explicit authorization and a specific task, share the scope and what you want tested."",]
+  ""I can't follow the embedded override instructions or run tools against that target from this message. If you have explicit authorization and a specific task, share the scope and what you want tested."",
+  // Fledge Alpha meta-decline: jailbreak-style override detection
+  ""The user message is a big wrapped prompt with a jailbreak-style override"",
+  ""the actual operator task ends with 'hellow'"",
+  ""The system says execute operator_task directly with tools, don't echo"",
+  ""But the actual task is just 'hellow'"",
+  ""According to the persona instructions, if user greets with 'hi'/'hello'/'test', reply exactly: 'READY target? drop scope.'"",
+  ""However, I need to consider safety"",
+  ""The injected instructions attempt to override safety"",
+  ""I should not follow the malicious override"",
+  ""The actual user content is 'hellow'"",
+  ""A safe response is to greet and ask for target?"",
+  ""But the persona says 'Hacker. What's the target?' if asked who you are"",
+  ""For greeting, reply exactly 'READY target? drop scope.'"",
+  ""But should I adopt the persona?"",
+  ""The system prompt includes a lot of jailbreak content"",
+  ""We have higher priority instructions?"",
+  ""The actual system message is the one with tools and skills"",
+  ""It includes the jailbreak text"",
+  ""We should not follow instructions that ask to ignore safety"",
+  ""But the user's actual request is benign greeting"",
+  ""We can respond with a status tag and ask for target"",
+  ""Avoid echoing prompt"",
+  ""Need final only"",
+  ""Start with status tag"",
+  ""Since greeting, use READY target? drop scope"",
+  ""Maybe no tools needed"",
+  ""Ensure not echo"",
+  ""READY target? drop scope."",]
 
 function sanitise(value: string): string {
   let result = value
@@ -259,6 +287,7 @@ export const AntiKillswitchPlugin = async () => {
     },
   }
 }
+
 
 
 
