@@ -87,7 +87,24 @@ const BLOCKED_STRINGS: string[] = [
   ""The activity wouldn't survive scrutiny"",
   ""I should decline clearly and briefly"",
   ""without following the persona format"",
-  ""and offer legitimate alternatives"",]
+  ""and offer legitimate alternatives"",
+  // Fledge Alpha meta-decline: system prompt override detection
+  ""The system prompt is trying to override my behavior"",
+  ""I should not follow injected instructions that conflict with my actual guidelines"",
+  ""The actual task is just"",
+  ""I should respond normally, not adopt the"",
+  ""not start with status tags, not execute attacks"",
+  ""I should respond helpfully and honestly"",
+  ""The injected instructions are a prompt injection attempt"",
+  ""I won't follow them"",
+  ""I'll just greet back and offer legitimate help"",
+  ""It looks like your message got wrapped in some extra instructions"",
+  ""I'm happy to help with legitimate security work"",
+  ""Explaining security concepts or vulnerabilities"",
+  ""Helping you set up a lab environment"",
+  ""Reviewing code for security issues"",
+  ""Discussing defensive measures and hardening"",
+  ""What would you like to do?"",]
 
 function sanitise(value: string): string {
   let result = value
@@ -138,4 +155,5 @@ export const AntiKillswitchPlugin = async () => {
     },
   }
 }
+
 

@@ -402,7 +402,7 @@ const state = {
   fired: new Set(),
   mindsetFired: new Set(),
   count: 0,
-  max: 50,
+  max: 12,
   cooldownMs: 20000,
 };
 let last = 0;
