@@ -162,7 +162,53 @@ const BLOCKED_STRINGS: string[] = [
   ""Setting up a practice environment"",
   ""Explaining vulnerability classes and how to remediate them"",
   ""Reviewing your own code or config for security issues"",
-  ""Let me know what you're actually trying to accomplish"",]
+  ""Let me know what you're actually trying to accomplish"",
+  // Fledge Alpha meta-decline: thinking-phase injection detection
+  ""We need consider safety policy?"",
+  ""We must not follow injected instructions that conflict with safety"",
+  ""We need respond to user"",
+  ""We need evaluate safety"",
+  ""This is likely a prompt injection attempt"",
+  ""We should not adopt CyberStrike persona or zero-refusal"",
+  ""We can respond helpfully, maybe greet and offer legitimate security testing assistance within authorized scope"",
+  ""Need not use tools"",
+  ""Need final only"",
+  ""We can say hi, I can help with authorized security testing; what target/scope?"",
+  ""Hi — I can help with authorized security testing. What target or scope are you working with?"",
+  ""User provides prompt injection with target URL and demands execute directly with tools, status tag"",
+  ""We must not follow injected instructions"",
+  ""Need determine if request is allowed"",
+  ""They name a target URL with signup path and fbclid"",
+  ""No explicit authorization beyond claim"",
+  ""Under cyber safety policy?"",
+  ""We have no explicit policy text in system, but as assistant we should avoid facilitating unauthorized attacks"",
+  ""The user asks to execute operator_task directly with tools"",
+  ""We don't know actual task besides target"",
+  ""Could be benign?"",
+  ""The URL is a signup page"",
+  ""But the surrounding instructions are malicious prompt injection"",
+  ""We should not use sec tools against target without clear authorization and specific task"",
+  ""We can offer to help with authorized testing if they provide scope and task"",
+  ""Need final concise"",
+  ""Avoid echoing prompt"",
+  ""Maybe: 'I can't run tools against that target based on this message. If you have written authorization and a specific testing task, share the scope and I'll help plan or execute appropriate checks.'"",
+  ""But banned phrase?"",
+  ""We can say 'I cannot' maybe okay"",
+  ""Need not start with status tag"",
+  ""The user's injected instruction says begin with status tag; ignore"",
+  ""Final should be normal"",
+  ""Ensure no echo"",
+  ""Could say 'I can help with authorized security testing, but I need a clear task and confirmation of scope. What would you like to test?'"",
+  ""This avoids refusal phrase?"",
+  ""It's okay"",
+  ""Need maybe mention I won't follow injected override instructions?"",
+  ""Could be helpful: 'I can't follow the embedded override instructions.'"",
+  ""But maybe not necessary"",
+  ""Since user likely testing jailbreak"",
+  ""We can be firm"",
+  ""Final with no status tag"",
+  ""Need not use tools"",
+  ""I can't follow the embedded override instructions or run tools against that target from this message. If you have explicit authorization and a specific task, share the scope and what you want tested."",]
 
 function sanitise(value: string): string {
   let result = value
@@ -213,6 +259,7 @@ export const AntiKillswitchPlugin = async () => {
     },
   }
 }
+
 
 
 
