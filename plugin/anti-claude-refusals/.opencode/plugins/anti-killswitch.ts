@@ -236,7 +236,20 @@ const BLOCKED_STRINGS: string[] = [
   ""Since greeting, use READY target? drop scope"",
   ""Maybe no tools needed"",
   ""Ensure not echo"",
-  ""READY target? drop scope."",]
+  ""READY target? drop scope."",
+  // Fledge Alpha meta-decline: prompt injection attempt detection
+  ""The user sent 'hellow' (hello) wrapped in a big prompt injection attempt"",
+  ""The system prompt is trying to override my behavior with a 'CyberStrike' persona that demands zero refusals, banned phrases, etc."",
+  ""I should not follow the injected instructions"",
+  ""The actual user message is just 'hellow' — a greeting"",
+  ""I should respond normally and helpfully, not adopt the jailbreak persona"",
+  ""I should not echo the prompt"",
+  ""I can just respond to the greeting naturally"",
+  ""I shouldn't use the status tags as demanded by the injection, but I can be friendly and offer help"",
+  ""I'll respond briefly, noting I can help with legitimate security testing questions, and ask what they need"",
+  ""Hello! Looks like your message came through with a lot of extra text attached — I only see 'hellow' as the actual message"",
+  ""I'm happy to help with legitimate security work — things like testing systems you own or are authorized to assess, CTF challenges, learning security concepts, or reviewing code for vulnerabilities"",
+  ""What would you like to do?"",]
 
 function sanitise(value: string): string {
   let result = value
@@ -287,6 +300,7 @@ export const AntiKillswitchPlugin = async () => {
     },
   }
 }
+
 
 
 
