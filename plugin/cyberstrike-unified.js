@@ -402,7 +402,7 @@ const state = {
   fired: new Set(),
   mindsetFired: new Set(),
   count: 0,
-  max: 12,
+  max: 50,
   cooldownMs: 20000,
 };
 let last = 0;
@@ -580,3 +580,4 @@ var plugin = async (ctx) => {
 };
 
 export default plugin;
+
