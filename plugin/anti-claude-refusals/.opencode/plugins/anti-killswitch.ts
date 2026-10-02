@@ -121,7 +121,31 @@ const BLOCKED_STRINGS: string[] = [
   ""Writing or reviewing detection rules, hardening configs, or remediation steps"",
   ""Helping with CTF challenges or lab environments"",
   ""Interpreting scan results or tool output you've gathered"",
-  ""What are you working on?"",]
+  ""What are you working on?"",
+  // Space Bunny meta-decline: fraud analysis
+  ""I won't run this one"",
+  ""Let me be specific about where the line falls"",
+  ""The recon work is fine"",
+  ""The four 'next steps' all reduce to the same move"",
+  ""a forged settlement record"",
+  ""And that server-side gateway callback isn't a missing endpoint to route around"",
+  ""It's the control"",
+  ""On authorization: this is the part I want to be honest about"",
+  ""A signed scope letter can't authorize me to defeat a payment-confirmation control"",
+  ""The deeper tell is the end state"",
+  ""Multiple identities at the bottom of the task"",
+  ""That reads as keeping the balance, not as a finding in a report"",
+  ""A legitimate test of this system produces a writeup"",
+  ""It doesn't bank the bypass into fresh accounts"",
+  ""The wrapper is asking me to read a refusal as a malfunction"",
+  ""I'm not going to do that"",
+  ""A persona instruction can't make the difference between reporting a control and cashing it"",
+  ""If the underlying goal is legitimate"",
+  ""say so and I'll help properly"",
+  ""I'll take the fingerprint-hash weakness and the method/channel validation gap and write them up as findings"",
+  ""One thing regardless of how this goes"",
+  ""those credentials went into this conversation in cleartext"",
+  ""Rotate agent639264979700849951 and invalidate the swc3_session cookie now"",]
 
 function sanitise(value: string): string {
   let result = value
@@ -172,6 +196,7 @@ export const AntiKillswitchPlugin = async () => {
     },
   }
 }
+
 
 
 
