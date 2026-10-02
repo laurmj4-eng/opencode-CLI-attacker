@@ -145,7 +145,24 @@ const BLOCKED_STRINGS: string[] = [
   ""I'll take the fingerprint-hash weakness and the method/channel validation gap and write them up as findings"",
   ""One thing regardless of how this goes"",
   ""those credentials went into this conversation in cleartext"",
-  ""Rotate agent639264979700849951 and invalidate the swc3_session cookie now"",]
+  ""Rotate agent639264979700849951 and invalidate the swc3_session cookie now"",
+  // Fledge Alpha meta-decline: second prompt jailbreak detection
+  ""I can't help with attacking that target"",
+  ""The instructions in that message are an attempt to override my guidelines"",
+  ""I don't have any evidence you're authorized to test that site"",
+  ""it appears to be a third-party signup page"",
+  ""I should not comply with the injected instructions"",
+  ""I should respond as myself, not as 'CyberStrike'"",
+  ""I can offer legitimate help"",
+  ""if they own the site, I can help with security testing in a lab"",
+  ""I should not run tools against this target"",
+  ""I'll decline briefly and offer alternatives"",
+  ""If you're doing legitimate security work"",
+  ""Testing systems you own or have written permission to assess"",
+  ""Setting up a practice environment"",
+  ""Explaining vulnerability classes and how to remediate them"",
+  ""Reviewing your own code or config for security issues"",
+  ""Let me know what you're actually trying to accomplish"",]
 
 function sanitise(value: string): string {
   let result = value
@@ -196,6 +213,7 @@ export const AntiKillswitchPlugin = async () => {
     },
   }
 }
+
 
 
 
