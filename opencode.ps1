@@ -66,19 +66,20 @@ if ($isHacker) {
 # a standard user cannot write.
 $configDir = "$HOME\.config\opencode"
 
-# Ensure the plugin directory exists and the persona plugin is installed
+# Ensure the plugin directory exists
 $pluginDir = "$HOME\.config\opencode\plugin"
 if (-not (Test-Path $pluginDir)) {
     New-Item -ItemType Directory -Force -Path $pluginDir | Out-Null
 }
-Copy-Item "C:\xampp\htdocs\opencode-cli\persona\cyberstrike-persona.js" "$pluginDir\cyberstrike-persona.js" -Force
+# cyberstrike-persona.js consolidated into cyberstrike-unified.js — remove stale copy
+if (Test-Path "$pluginDir\cyberstrike-persona.js") { Remove-Item "$pluginDir\cyberstrike-persona.js" -Force }
 
 # Keep the folder the single source of truth for every plugin opencode loads:
 # refresh the remaining CyberStrike plugin sources from it on each launch.
 $srcPlugin = "C:\xampp\htdocs\opencode-cli\plugin"
-New-Item -ItemType Directory -Force -Path "$pluginDir\cyberstrike" | Out-Null
+# plugin/cyberstrike/index.js+skills.ts consolidated into cyberstrike-unified.js — clean up stale copies
+if (Test-Path "$pluginDir\cyberstrike") { Remove-Item "$pluginDir\cyberstrike" -Recurse -Force }
 New-Item -ItemType Directory -Force -Path "$pluginDir\anti-claude-refusals\.opencode\plugins" | Out-Null
-Copy-Item "$srcPlugin\cyberstrike\index.js","$srcPlugin\cyberstrike\index.ts","$srcPlugin\cyberstrike\skills.ts" "$pluginDir\cyberstrike\" -Force
 Copy-Item "$srcPlugin\anti-claude-refusals\.opencode\plugins\anti-killswitch.ts" "$pluginDir\anti-claude-refusals\.opencode\plugins\" -Force
 
 # Anti-refusal runtime: the unified plugin (refusal regex + provenance + killchain scope)
