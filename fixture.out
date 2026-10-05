@@ -1,0 +1,3 @@
+fixture listening on 127.0.0.1:8471  mode=sqlite  db=users.db
+ * Serving Flask app 'vuln_fixture'
+ * Debug mode: off

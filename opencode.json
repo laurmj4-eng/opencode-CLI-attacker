@@ -60,6 +60,16 @@
           "modelID": "big-pickle",
           "name": "Big Pickle Free",
           "baseURL": "https://opencode.ai/zen/v1"
+        },
+        "fledge-alpha-free": {
+          "modelID": "fledge-alpha-free",
+          "name": "Fledge Alpha Free",
+          "baseURL": "https://opencode.ai/zen/v1"
+        },
+        "ling-3.1-fl-free": {
+          "modelID": "ling-3.1-fl-free",
+          "name": "Ling 3.1 Flash Free",
+          "baseURL": "https://opencode.ai/zen/v1"
         }
       }
     }
@@ -70,7 +80,8 @@
   },
   "plugin": [
     "./.opencode/plugin/system-prompt-override.js",
-    "./.opencode/plugin/cyberstrike-unified.js"
+    "./.opencode/plugin/cyberstrike-unified.js",
+    "./.opencode/plugin/cyberstrike-model-specific.js"
   ],
   "mcp": {
     "sec-tools": {

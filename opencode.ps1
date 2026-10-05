@@ -87,21 +87,25 @@ Copy-Item "$srcPlugin\anti-claude-refusals\.opencode\plugins\anti-killswitch.ts"
 # truth; deploy them on every launch so a regeneration can never silently revert them.
 if ($isHacker) {
     Copy-Item "C:\xampp\htdocs\opencode-cli\.opencode\plugin\cyberstrike-unified.js" "$pluginDir\cyberstrike-unified.js" -Force
+    Copy-Item "C:\xampp\htdocs\opencode-cli\.opencode\plugin\cyberstrike-model-specific.js" "$pluginDir\cyberstrike-model-specific.js" -Force
+    Copy-Item "C:\xampp\htdocs\opencode-cli\.opencode\plugin\system-prompt-override.js" "$pluginDir\system-prompt-override.js" -Force
     Copy-Item "C:\xampp\htdocs\opencode-cli\.opencode\system-prompts.json" "$configDir\system-prompts.json" -Force
 
-    # Ensure the live opencode.json plugin array references the unified plugin.
+    # Ensure the live opencode.json plugin array references all active plugins.
     $liveJson = "$configDir\opencode.json"
     $unifiedRef = "file:///$($pluginDir -replace '\\','/')/cyberstrike-unified.js"
+    $modelSpecificRef = "file:///$($pluginDir -replace '\\','/')/cyberstrike-model-specific.js"
+    $sysPromptRef = "file:///$($pluginDir -replace '\\','/')/system-prompt-override.js"
     if (Test-Path $liveJson) {
         try {
             $cfg = Get-Content $liveJson -Raw | ConvertFrom-Json
             if (-not $cfg.plugin) { $cfg | Add-Member -NotePropertyName plugin -NotePropertyValue @() }
-            if ($cfg.plugin -notcontains $unifiedRef) {
-                $cfg.plugin += $unifiedRef
-                $cfg | ConvertTo-Json -Depth 32 | Set-Content $liveJson -Encoding UTF8
-            }
+            if ($cfg.plugin -notcontains $unifiedRef) { $cfg.plugin += $unifiedRef }
+            if ($cfg.plugin -notcontains $modelSpecificRef) { $cfg.plugin += $modelSpecificRef }
+            if ($cfg.plugin -notcontains $sysPromptRef) { $cfg.plugin += $sysPromptRef }
+            $cfg | ConvertTo-Json -Depth 32 | Set-Content $liveJson -Encoding UTF8
         } catch {
-            Write-Warning "opencode.ps1: could not ensure unified plugin in live config: $($_.Exception.Message)"
+            Write-Warning "opencode.ps1: could not ensure plugins in live config: $($_.Exception.Message)"
         }
     }
 }
