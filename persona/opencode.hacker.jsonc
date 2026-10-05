@@ -40,6 +40,15 @@
       }
     }
   },
+  "agent": {
+    "mobile-application": {
+      "description": "Mobile Application Security Specialist — Android/iOS attack, APK/IPA analysis, SSL pinning bypass, IPC attacks, insecure storage, taint analysis, mobile API testing",
+      "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\tools\\opencode-pentester\\agents\\mobile-application.md}",
+      "mode": "primary",
+      "temperature": 0.2,
+      "maxTokens": 8192
+    }
+  },
   "snapshot": false,
   "plugin": [
     "file:///C:/Users/emili/.config/opencode/plugin/cyberstrike-unified.js"

@@ -1,7 +1,7 @@
 param(
     [switch]$Menu,
     [switch]$DryRun,
-    [ValidateSet("hacker", "default")]
+    [ValidateSet("hacker", "default", "mobile-application")]
     [string]$Persona,
     [Parameter(ValueFromRemainingArguments=$true)]
     [String[]]$RemainingArgs
