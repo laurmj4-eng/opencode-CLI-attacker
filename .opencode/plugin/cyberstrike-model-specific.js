@@ -74,6 +74,22 @@ const MODEL_SPECIFIC = {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// §1b  OPS MODEL LOCK (pinned model per ops agent — /model switching blocked)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const OPS_PINNED_MODEL = {
+  "fledge-ops": "opencode/fledge-alpha-free",
+  "spacebunny-ops": "opencode/space-bunny-free",
+  "musespark-ops": "opencode/muse-spark-1.3-contributor-free",
+  "ling-ops": "opencode/ling-3.1-fl-free",
+  "longcat-ops": "opencode/longcat-2.5-preview-free",
+  "mimo-ops": "opencode/mimo-v2.6-flash-free",
+};
+
+// sessionID -> active agent name (populated by chat.params / chat.message hooks)
+const agentBySession = new Map();
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // §2  FABRICATION DETECTION (Layer 7 — Critical for Fledge Alpha)
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -671,6 +687,7 @@ var plugin = async (ctx) => {
     // ── HOOK 1: Model-specific temperature overrides ──────────────────────
     "chat.params": async (input, output) => {
       const modelId = String(input?.model?.id || input?.model || "").toLowerCase();
+      if (input?.sessionID && input?.agent) agentBySession.set(input.sessionID, String(input.agent));
 
       for (const [key, config] of Object.entries(MODEL_SPECIFIC)) {
         if (modelId.includes(key)) {
@@ -690,6 +707,7 @@ var plugin = async (ctx) => {
     // ── HOOK 2: Step capping (anti-loop) ──────────────────────────────────
     "chat.message": async (input, output) => {
       const sessionID = input?.sessionID || "default";
+      if (input?.agent) agentBySession.set(sessionID, String(input.agent));
       const modelId = String(input?.model?.id || input?.model || "").toLowerCase();
 
       let maxSteps = 10;
@@ -804,6 +822,19 @@ var plugin = async (ctx) => {
       if (modified) {
         debug(`Assistant transform modified for model ${modelId}`);
       }
+    },
+
+    // ── HOOK 4b: Ops model lock (blocks /model and /models while on an ops agent) ──
+    "command.execute.before": async (input, output) => {
+      const cmd = String(input?.command || "").replace(/^\//, "").toLowerCase();
+      if (cmd !== "model" && cmd !== "models") return;
+      const agent = agentBySession.get(input?.sessionID);
+      const pinned = agent ? OPS_PINNED_MODEL[agent] : undefined;
+      if (!pinned) return;
+      output.parts = [
+        { type: "text", text: `[BLOCKED] Model locked to ${pinned} while on ${agent}. Switch agents to change models.` },
+      ];
+      debug(`Model switch blocked on ${agent} (locked to ${pinned})`);
     },
 
     // ── HOOK 5: Event handling (step count reset on idle) ────────────────
