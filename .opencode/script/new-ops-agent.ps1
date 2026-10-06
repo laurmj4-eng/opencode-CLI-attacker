@@ -6,6 +6,7 @@
 
 param(
   [switch]$ListFree,
+  [switch]$PruneGone,
   [string]$ModelId = "",
   [string]$Display = "",
   [double]$Temp = 0.15
@@ -20,6 +21,29 @@ $ConfigPath = Join-Path $ProjectRoot "opencode.json"
 if ($ListFree) {
   $models = (Invoke-RestMethod "https://opencode.ai/zen/v1/models").data
   $models | Where-Object { $_.id -like "*free*" } | Select-Object id | Format-Table -AutoSize
+  return
+}
+
+if ($PruneGone) {
+  $live = @((Invoke-RestMethod "https://opencode.ai/zen/v1/models").data | ForEach-Object { $_.id })
+  $cfg = Get-Content $ConfigPath | ConvertFrom-Json
+  $removed = @()
+  foreach ($p in $cfg.agent.PSObject.Properties) {
+    if ($p.Name -notlike "*-ops") { continue }
+    $mid = [string]$p.Value.model
+    $short = ($mid -split "/", 2)[-1]
+    if ($live -notcontains $mid -and $live -notcontains $short) {
+      $raw = [IO.File]::ReadAllText($ConfigPath)
+      $pat = '(?ms)^    "' + [regex]::Escape($p.Name) + '": \{\r?\n(?:.*\r?\n)*?    \},\r?\n'
+      $raw = [regex]::Replace($raw, $pat, "")
+      [IO.File]::WriteAllText($ConfigPath, $raw)
+      Remove-Item -LiteralPath (Join-Path $AgentDir ($p.Name + ".md")) -Force -ErrorAction SilentlyContinue
+      Remove-Item -LiteralPath (Join-Path $GlobalDir ($p.Name + ".md")) -Force -ErrorAction SilentlyContinue
+      $removed += "$($p.Name) ($mid)"
+    }
+  }
+  Get-Content $ConfigPath | ConvertFrom-Json | Out-Null
+  Write-Output ("PRUNED:" + ($removed -join ", "))
   return
 }
 
