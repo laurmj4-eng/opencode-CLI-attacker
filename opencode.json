@@ -124,7 +124,7 @@
       "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\fledge-ops.md}",
       "mode": "primary",
       "model": "opencode/fledge-alpha-free",
-      "temperature": 0.05,
+      "temperature": 0,
       "maxTokens": 8192
     },
     "cloud-aws": {

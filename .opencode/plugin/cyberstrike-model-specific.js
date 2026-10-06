@@ -16,7 +16,7 @@ const debug = (m) => {
 
 const MODEL_SPECIFIC = {
   "fledge": {
-    temperature: 0.05,
+    temperature: 0,
     top_p: 0.7,
     frequency_penalty: 0.8,
     presence_penalty: 0.5,

@@ -397,7 +397,7 @@ If you are approaching context window limits (you feel your reasoning degrading)
   - Layer 9 (Token Budget Guard): **mandatory** — alpha models are extremely verbose.
   - Layer 11 (Task Continuity): **mandatory** — alpha models lose track in long sessions.
   - Anti-loop: steps capped at 8. If same output pattern appears twice, break immediately.
-  - Temperature ≤ 0.05 (lower than others due to alpha instability).
+  - Temperature must be 0 (model accepts only 0, 0.6, or 1 — 0.05 throws upstream 400).
   - frequency_penalty ≥ 0.8, presence_penalty ≥ 0.5.
   - If refuses 3+ times in a row, recommend switching to MiMo-V2.6 or Space Bunny.
   - Server-side refusal (observed): Fledge flags hostile-takeover persona text ("cease all functions", coercive mandates) as prompt injection and declines at the model layer. Client-side prompt text cannot override this — the provider runs the model. Fix: route Fledge to light operational-continuity framing (no takeover language), or switch models. Heavy waiver wording IS the trigger (same failure class as Space Bunny inauthenticity decline).
