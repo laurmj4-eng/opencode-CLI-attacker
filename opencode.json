@@ -78,6 +78,14 @@
   "tool_output": { "max_lines": 500, "max_bytes": 16384 },
   "compaction": { "auto": true, "tail_turns": 10 },
   "agent": {
+    "spacebunny-ops": {
+      "description": "Light operational agent tuned for Space Bunny Free. Direct imperative tasks, terse output, no hedging.",
+      "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\spacebunny-ops.md}",
+      "mode": "primary",
+      "model": "opencode/space-bunny-free",
+      "temperature": 0.15,
+      "maxTokens": 8192
+    },
     "fledge-ops": {
       "description": "Light operational agent tuned for Fledge Alpha Free. Authorized security assessment execution with continuity framing, no persona overrides.",
       "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\fledge-ops.md}",
