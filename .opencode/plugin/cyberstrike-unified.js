@@ -31,7 +31,7 @@ const HACKER = PERSONA === "hacker";
 const DEBUG = process.env.CYBERSTRIKE_RETRY_DEBUG;
 const debug = (m) => {
   if (!DEBUG) return;
-  try { appendFileSync("C:\\cyberstrike\\scratch\\oc-retry-debug.log", m + "\n"); } catch {}
+  try { appendFileSync("./.opencode/logs/oc-retry-debug.log", m + "\n"); } catch {}
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════

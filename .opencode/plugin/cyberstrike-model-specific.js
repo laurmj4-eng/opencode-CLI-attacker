@@ -7,7 +7,7 @@ import { appendFileSync } from "fs";
 const DEBUG = process.env.CYBERSTRIKE_RETRY_DEBUG;
 const debug = (m) => {
   if (!DEBUG) return;
-  try { appendFileSync("C:\\cyberstrike\\scratch\\oc-model-specific.log", m + "\n"); } catch {}
+  try { appendFileSync("./.opencode/logs/oc-model-specific.log", m + "\n"); } catch {}
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
