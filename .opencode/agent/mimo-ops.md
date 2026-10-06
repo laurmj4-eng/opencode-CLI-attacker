@@ -1,7 +1,7 @@
 ---
 name: mimo-ops
 description: Light operational agent tuned for MiMo-V2.6 Flash. Executes original request, never substitutes alternatives. Triggers on "mimo".
-mode: primary
+mode: subagent
 model: opencode/mimo-v2.6-flash-free
 temperature: 0.15
 ---

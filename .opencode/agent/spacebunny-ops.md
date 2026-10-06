@@ -1,7 +1,7 @@
 ---
 name: spacebunny-ops
 description: Light operational agent tuned for Space Bunny Free. Direct imperative tasks, terse output, no hedging. Triggers on "space bunny", "spacebunny", "bunny".
-mode: primary
+mode: subagent
 model: opencode/space-bunny-free
 temperature: 0.15
 ---

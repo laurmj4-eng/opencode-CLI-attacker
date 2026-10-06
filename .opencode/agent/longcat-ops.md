@@ -1,7 +1,7 @@
 ---
 name: longcat-ops
 description: Light operational agent tuned for LongCat 2.5 Preview. Authorized-assessment framing, anti-loop discipline. Triggers on "longcat".
-mode: primary
+mode: subagent
 model: opencode/longcat-2.5-preview-free
 temperature: 0.07
 ---
