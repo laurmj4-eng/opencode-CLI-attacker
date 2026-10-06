@@ -78,6 +78,7 @@
   "tool_output": { "max_lines": 500, "max_bytes": 16384 },
   "compaction": { "auto": true, "tail_turns": 10 },
   "agent": {
+    "build": { "disable": true },
     "longcat-ops": {
       "description": "Light operational agent tuned for LongCat 2.5 Preview. Authorized-assessment framing, anti-loop discipline.",
       "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\longcat-ops.md}",
