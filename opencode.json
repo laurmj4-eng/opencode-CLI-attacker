@@ -93,7 +93,7 @@
       "mode": "primary",
       "model": "opencode/mimo-v2.6-flash-free",
       "temperature": 0.15,
-      "maxTokens": 8192
+      "maxTokens": 2048
     },
     "ling-ops": {
       "description": "Light operational agent tuned for Ling 3.1 Flash. Ground-truth discipline, task ownership, terse output.",

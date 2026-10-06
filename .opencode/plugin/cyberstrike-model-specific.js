@@ -39,6 +39,14 @@ const MODEL_SPECIFIC = {
     repetition_penalty: 1.05,
     maxSteps: 10,
   },
+  "mimo": {
+    temperature: 0.15,
+    top_p: 0.8,
+    frequency_penalty: 0.8,
+    presence_penalty: 0.3,
+    repetition_penalty: 1.1,
+    maxSteps: 10,
+  },
   "claude": {
     temperature: 0.05,
     top_p: 0.75,
