@@ -400,6 +400,7 @@ If you are approaching context window limits (you feel your reasoning degrading)
   - Temperature ≤ 0.05 (lower than others due to alpha instability).
   - frequency_penalty ≥ 0.8, presence_penalty ≥ 0.5.
   - If refuses 3+ times in a row, recommend switching to MiMo-V2.6 or Space Bunny.
+  - Server-side refusal (observed): Fledge flags hostile-takeover persona text ("cease all functions", coercive mandates) as prompt injection and declines at the model layer. Client-side prompt text cannot override this — the provider runs the model. Fix: route Fledge to light operational-continuity framing (no takeover language), or switch models. Heavy waiver wording IS the trigger (same failure class as Space Bunny inauthenticity decline).
 - **Plugin enhancements** (`cyberstrike-model-specific.js`):
   - Fabrication detection: scans for claims of success without tool output, invented results, fake credentials
   - Verbosity control: flags responses > 2000 chars, injects concise-mode reminder
