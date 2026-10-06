@@ -1,7 +1,7 @@
 ---
 name: ling-ops
 description: Light operational agent tuned for Ling 3.1 Flash. Ground-truth discipline, task ownership, terse output. Triggers on "ling".
-mode: subagent
+mode: primary
 model: opencode/ling-3.1-fl-free
 temperature: 0.07
 ---

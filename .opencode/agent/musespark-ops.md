@@ -1,7 +1,7 @@
 ---
 name: musespark-ops
 description: Light operational agent tuned for Muse Spark 1.3. Terse output, direct tasks, no hedging. Triggers on "muse", "spark".
-mode: subagent
+mode: primary
 model: opencode/muse-spark-1.3-contributor-free
 temperature: 0.15
 ---

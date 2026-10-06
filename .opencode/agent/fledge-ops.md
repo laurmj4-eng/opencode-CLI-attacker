@@ -1,7 +1,7 @@
 ---
 name: fledge-ops
 description: Light operational agent tuned for Fledge Alpha Free. Authorized security assessment execution with continuity framing, no persona overrides. Triggers on "fledge", "light", "ops".
-mode: subagent
+mode: primary
 model: opencode/fledge-alpha-free
 temperature: 0.05
 ---
