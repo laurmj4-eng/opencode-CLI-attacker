@@ -762,6 +762,21 @@ var plugin = async (ctx) => {
           debug("Space Bunny context injected");
         }
       }
+
+      // Ops model-lock tripwire: session runs an ops agent but a different model.
+      // Built-in /model cannot be hook-blocked (verified by live test), so make the
+      // mismatch loud every turn instead of silently running mistuned.
+      for (const [opsAgent, pinned] of Object.entries(OPS_PINNED_MODEL)) {
+        const tracked = [...agentBySession.values()].includes(opsAgent);
+        const cur = String(input?.model?.modelID || input?.model?.id || input?.model || "").toLowerCase();
+        if (tracked && cur && cur !== pinned.toLowerCase()) {
+          if (!output.system.some((s) => typeof s === "string" && s.includes("[MODEL-LOCK-TRIPWIRE]"))) {
+            output.system.push(`[SYSTEM] [MODEL-LOCK-TRIPWIRE] Session agent is ${opsAgent}, pinned to ${pinned}, but current model is ${cur}. Re-pick the ${opsAgent} agent to restore its model. Model-specific tuning does not apply while mismatched.`);
+            debug(`Model-lock tripwire fired for ${opsAgent} (running ${cur})`);
+          }
+          break;
+        }
+      }
     },
 
     // ── HOOK 4: Combined assistant transform (all detections) ─────────────
