@@ -74,6 +74,43 @@
       }
     }
   },
+  "default_agent": "hacker",
+  "tool_output": { "max_lines": 500, "max_bytes": 16384 },
+  "compaction": { "auto": true, "tail_turns": 10 },
+  "agent": {
+    "ad-kerberos": {
+      "description": "Active Directory and Kerberos attack specialist. BloodHound, Kerberoast, AS-REP roast, DCSync, golden ticket, silver ticket, NTLM relay, ADCS, lateral movement.",
+      "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\ad-kerberos.md}",
+      "mode": "subagent",
+      "model": "opencode/nemotron-3.5-lightning-free",
+      "temperature": 0.07,
+      "maxTokens": 8192
+    },
+    "network-recon": {
+      "description": "Network reconnaissance specialist. Port scanning, service enumeration, OSINT, subdomain discovery, MITM, lateral movement, SMB/RDP/SSH attacks.",
+      "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\network-recon.md}",
+      "mode": "subagent",
+      "model": "opencode/nemotron-3.5-lightning-free",
+      "temperature": 0.07,
+      "maxTokens": 8192
+    },
+    "web-app": {
+      "description": "Web application security specialist. OWASP Top 10, SQLi, XSS, SSRF, SSTI, IDOR, auth bypass, file upload, deserialization, business logic.",
+      "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\web-app.md}",
+      "mode": "subagent",
+      "model": "opencode/nemotron-3.5-lightning-free",
+      "temperature": 0.07,
+      "maxTokens": 8192
+    },
+    "facebook-tracker": {
+      "description": "Facebook account hacking specialist. Phishing, credential stuffing, session hijacking, OAuth abuse, SIM swap, Business Manager attacks, OSINT, and Facebook-specific exploit chains.",
+      "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\facebook-tracker.md}",
+      "mode": "primary",
+      "model": "opencode/nemotron-3.5-lightning-free",
+      "temperature": 0.07,
+      "maxTokens": 8192
+    }
+  },
   "instructions": [".opencode/prompts/anti-refusal.md"],
   "skills": {
     "paths": [".opencode/skills"]
