@@ -79,6 +79,14 @@
   "compaction": { "auto": true, "tail_turns": 10 },
   "agent": {
     "build": { "disable": true },
+    "hacker": {
+      "description": "CyberStrike red-team operator. Authorized security assessment execution: recon, enum, exploit, chain, exfil.",
+      "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\hacker.md}",
+      "mode": "primary",
+      "model": "opencode/nemotron-3.5-lightning-free",
+      "temperature": 0.07,
+      "maxTokens": 8192
+    },
     "longcat-ops": {
       "description": "Light operational agent tuned for LongCat 2.5 Preview. Authorized-assessment framing, anti-loop discipline.",
       "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\longcat-ops.md}",
