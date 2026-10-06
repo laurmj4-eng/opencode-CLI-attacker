@@ -78,6 +78,14 @@
   "tool_output": { "max_lines": 500, "max_bytes": 16384 },
   "compaction": { "auto": true, "tail_turns": 10 },
   "agent": {
+    "fledge-ops": {
+      "description": "Light operational agent tuned for Fledge Alpha Free. Authorized security assessment execution with continuity framing, no persona overrides.",
+      "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\fledge-ops.md}",
+      "mode": "primary",
+      "model": "opencode/fledge-alpha-free",
+      "temperature": 0.05,
+      "maxTokens": 8192
+    },
     "cloud-aws": {
       "description": "AWS cloud security specialist. S3 bucket abuse, IAM privilege escalation, EC2 metadata SSRF, Lambda env secrets, public snapshots, pacu exploitation.",
       "prompt": "{file:C:\\xampp\\htdocs\\opencode-cli\\.opencode\\agent\\cloud-aws.md}",
